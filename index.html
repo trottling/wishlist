@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
     <!-- Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -56,15 +55,41 @@
         .filled-heart {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-    </style>
-    <style>
+
         body {
             min-height: max(884px, 100dvh);
+        }
+
+        /* Лоадер - простой спиннер */
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        .loader {
+          border-style: solid;
+          border-color: #f4257b transparent transparent transparent;
+          animation: spin 1s linear infinite;
+        }
+
+        /* Анимация для карточек */
+        .card-animate {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .card-animate.show {
+          opacity: 1;
+          transform: translateY(0);
         }
     </style>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-charcoal dark:text-pink-50 min-h-screen">
 <div class="relative flex h-full min-h-screen w-full flex-col polka-dot-bg overflow-x-hidden">
+
+    <!-- Экран загрузки -->
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-background-light dark:bg-background-dark z-50">
+      <div class="loader rounded-full border-4 border-primary border-t-transparent w-12 h-12"></div>
+    </div>
+
     <!-- TopAppBar -->
     <header class="sticky top-0 z-20 flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 justify-between border-b border-pink-100 dark:border-pink-900/30">
         <div class="flex size-12 shrink-0 items-center">
@@ -117,5 +142,27 @@
         </div>
     </main>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loadingScreen = document.getElementById("loading-screen");
+    const cards = document.querySelectorAll("main .grid > div");
+
+    cards.forEach(card => card.classList.add("card-animate"));
+
+    setTimeout(() => {
+      loadingScreen.style.opacity = '0';
+      loadingScreen.style.pointerEvents = 'none';
+
+      setTimeout(() => loadingScreen.remove(), 300);
+
+      cards.forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add("show");
+        }, i * 150);
+      });
+    }, 1500);
+  });
+</script>
 </body>
 </html>
