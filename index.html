@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en">
+<html class="light" lang="ru">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Hello Kitty My Wishlist</title>
+    <title>Вишлист</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+          rel="stylesheet"/>
     <!-- Material Symbols -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+          rel="stylesheet"/>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -60,25 +63,28 @@
             min-height: max(884px, 100dvh);
         }
 
-        /* Лоадер - простой спиннер */
         @keyframes spin {
-          to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
+
         .loader {
-          border-style: solid;
-          border-color: #f4257b transparent transparent transparent;
-          animation: spin 1s linear infinite;
+            border-style: solid;
+            border-color: #f4257b transparent transparent transparent;
+            animation: spin 1s linear infinite;
         }
 
         /* Анимация для карточек */
         .card-animate {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
+
         .card-animate.show {
-          opacity: 1;
-          transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -86,83 +92,210 @@
 <div class="relative flex h-full min-h-screen w-full flex-col polka-dot-bg overflow-x-hidden">
 
     <!-- Экран загрузки -->
-    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-background-light dark:bg-background-dark z-50">
-      <div class="loader rounded-full border-4 border-primary border-t-transparent w-12 h-12"></div>
+    <div id="loading-screen"
+         class="fixed inset-0 flex items-center justify-center bg-background-light dark:bg-background-dark z-50">
+        <div class="loader rounded-full border-4 border-primary border-t-transparent w-12 h-12"></div>
     </div>
 
     <!-- TopAppBar -->
-    <header class="sticky top-0 z-20 flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 justify-between border-b border-pink-100 dark:border-pink-900/30">
-        <div class="flex size-12 shrink-0 items-center">
-            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full border-2 border-primary size-10" data-alt="Illustration of Hello Kitty face icon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBat_gKygkDdc0MxzlTW_jkhFPYwDUhYxCwxWXjggCaDbesfNrVkXOuGcuvaX4dAfmxRGVwt2dk4MK3tkF-y1lHAB6Jc7m25Stk-J94Gnp1miNUmKGwqb1MDIoF2IBM6kDHyNUWldTNRHaCQCl0FoCVuj0dbgo4QbHNqxjWHBzwabX4Wtm3fxyhrdaUvQNiWiiZtWCXNM8bbzpllCtC0aeJGott1l7siJ6wKlinQgeSG_ov725sFPzIirvcsa_dAxAe5DL9gt60eoE");'>
-            </div>
-        </div>
-        <h1 class="text-primary text-xl font-extrabold leading-tight tracking-tight flex-1 ml-2">Мой вишлист</h1>
+    <header class="sticky top-0 z-20 flex items-center justify-center border-b border-pink-100 bg-white/80 px-4 py-4 backdrop-blur-md dark:border-pink-900/30 dark:bg-background-dark/80 sm:px-6 lg:px-10">
+        <h1 id="wishlist-title"
+            class="mx-auto w-full max-w-6xl text-center text-xl font-extrabold leading-tight tracking-tight text-primary sm:text-2xl">Вишлист</h1>
     </header>
-    <main class="flex-1 pb-24">
+    <main class="mx-auto flex w-full max-w-7xl flex-1 px-3 pb-16 sm:px-6 md:pb-20 lg:px-10 lg:pb-24">
         <!-- ImageGrid -->
-        <div class="grid grid-cols-2 gap-4 p-4">
-            <!-- Card 1 -->
-            <div class="flex flex-col gap-3 group">
-                <div class="relative w-full aspect-[4/5] bg-center bg-no-repeat bg-cover rounded-3xl shadow-lg border-4 border-white dark:border-gray-800" data-alt="Hello Kitty classic red bow plush toy" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA58e2U8MdYBH2cSWg6rEvbgROBy8DKu7j78SWs5I-l4EUfCaujn5UIf6F4FNpNvPOfDu23-KaU8FJp5EIE64JaE3cr1I8fxlSMfbYw1FiQ0N6_1YafPucEwkFD6cTPw_YQEVxzdISONh_SIBaXKcWpOEm5Jy2tFH57cwPl1BejyfxJlP0aM7kAbInLhvxLZp2LwpaW5B7tPHuY1YRVg2WoxfEnYGpHXUz0qhVJeLni5oP9kHlrFizDzdvjUovlFnkGga2kF8cDseM");'>
-                </div>
-                <div class="px-1">
-                    <p class="text-charcoal dark:text-pink-50 text-base font-bold leading-tight">Hello Kitty Plush</p>
-                    <p class="text-pink-400 dark:text-pink-300/60 text-xs font-medium mt-1 uppercase tracking-wider">Added 2d ago</p>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="flex flex-col gap-3">
-                <div class="relative w-full aspect-[4/5] bg-center bg-no-repeat bg-cover rounded-3xl shadow-lg border-4 border-white dark:border-gray-800" data-alt="Cute pink bow headband accessory" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAkqXJnoxS5mZNWBXRJH_ByI53DMZk9s7kONVR3bgo18RhC5AyHyTMmFDY5T6OZZrzJjuxrwgNq3vMw6PeA0z6cYxQRt0IK9A6or3b5rMm5sQg8XVp-_mZh3JtZMmdTdrU__XWhg8Gi4SPE-QiVz1jscisdQYd3NOnDUeBbdZBPJRfcOXx-Ma_k0uEHLQmJCAouNvowQv-ryV05bI6VLgN9DZvLkkMuafBmN1eVDtNahXLBRCbr42X4fcyriXAPwgUWnc4mvLacMQE");'>
-                    <button class="absolute top-3 right-3 flex size-9 items-center justify-center rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-sm text-primary shadow-sm">
-                        <span class="material-symbols-outlined">favorite</span>
-                    </button>
-                </div>
-                <div class="px-1">
-                    <p class="text-charcoal dark:text-pink-50 text-base font-bold leading-tight">Bow Headband</p>
-                    <p class="text-pink-400 dark:text-pink-300/60 text-xs font-medium mt-1 uppercase tracking-wider">Added 1w ago</p>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="flex flex-col gap-3">
-                <div class="relative w-full aspect-[4/5] bg-center bg-no-repeat bg-cover rounded-3xl shadow-lg border-4 border-white dark:border-gray-800" data-alt="A pink aesthetic journal with gold accents" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuxbK8sGZKFsrqFmlfr3MLwkDVnaU3iRlFaBBsnqSzKsgPpsOO-yL0r1_pJG-_6EUz65vI7ZuRIUkTKQG1vteiWhYUjfcLoJAjT7byGslWMO_lLTSzH8MZLJqcupOapcmxiF87WP-7F9bWV-1_Mbyo7Caz-7oX677FDzaBC11qBUJWWIrBDrZ04T4fQoCs83PkBouWxqkXwhc3_9-KVQP3m1-uj8dz1r3HVpbRKOLoX1fCiasiT1lXnNKr-wNHbBm7QCR2kL_xSZg");'></div>
-                <div class="px-1">
-                    <p class="text-charcoal dark:text-pink-50 text-base font-bold leading-tight">Pink Journal</p>
-                    <p class="text-pink-400 dark:text-pink-300/60 text-xs font-medium mt-1 uppercase tracking-wider">Added 3d ago</p>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="flex flex-col gap-3">
-                <div class="relative w-full aspect-[4/5] bg-center bg-no-repeat bg-cover rounded-3xl shadow-lg border-4 border-white dark:border-gray-800" data-alt="Collection of cute Sanrio themed stickers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDP0fVqAopLzy0tAxEX3YzRl87ce4qWoyPL6W1nsRm-X-Dg-XAMIEKo5pHPUCKnblCW7dAqfhSVYKlPgeI_0Qqq61ekYjsU7-gDHF_0LP7d0_OCnL4cqVKyL-Whd5msjgQDTVkC-7qfzC87U_tKK2eKL5e2QREnmq_-ZjnPM1By7jUmLsIYbM-gBTCb3cE_bdRqWr-BmXm45oX8w_W7Qt3QTExoBYmarKHlxF9Z9m5Z6n9Gg_AMtjJ3uEtH543VdsBtxZFl4cjawp8");'>
-                </div>
-                <div class="px-1">
-                    <p class="text-charcoal dark:text-pink-50 text-base font-bold leading-tight">Sanrio Stickers</p>
-                    <p class="text-pink-400 dark:text-pink-300/60 text-xs font-medium mt-1 uppercase tracking-wider">Added yesterday</p>
-                </div>
-            </div>
+        <div id="image-grid" class="grid w-full grid-cols-1 gap-4 py-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+            <!-- Карточки будут загружаться сюда -->
         </div>
     </main>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const loadingScreen = document.getElementById("loading-screen");
-    const cards = document.querySelectorAll("main .grid > div");
+    document.addEventListener("DOMContentLoaded", () => {
+        const api = 'http://localhost:8080/public';
+        const REQUEST_TIMEOUT_MS = 8000;
 
-    cards.forEach(card => card.classList.add("card-animate"));
+        const loadingScreen = document.getElementById("loading-screen");
+        const imageGrid = document.getElementById("image-grid");
+        const title = document.getElementById("wishlist-title");
 
-    setTimeout(() => {
-      loadingScreen.style.opacity = '0';
-      loadingScreen.style.pointerEvents = 'none';
+        const showError = (message) => {
+            loadingScreen.remove();
+            imageGrid.innerHTML = `
+                <div class="col-span-2 rounded-3xl border border-pink-200 dark:border-pink-900/60 bg-white/85 dark:bg-background-dark/80 p-5 text-center shadow">
+                    <p class="text-base font-semibold text-primary">Не удалось загрузить вишлист</p>
+                    <p class="mt-2 text-sm text-charcoal dark:text-pink-100/80">${message}</p>
+                    <button id="retry-btn" class="mt-4 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90">Попробовать снова</button>
+                </div>
+            `;
 
-      setTimeout(() => loadingScreen.remove(), 300);
+            const retryBtn = document.getElementById("retry-btn");
+            retryBtn?.addEventListener("click", () => {
+                window.location.reload();
+            });
+        };
 
-      cards.forEach((card, i) => {
-        setTimeout(() => {
-          card.classList.add("show");
-        }, i * 150);
-      });
-    }, 1500);
-  });
+        const fetchWithTimeout = async (url, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+            try {
+                return await fetch(url, {
+                    ...options,
+                    signal: controller.signal,
+                });
+            } finally {
+                clearTimeout(timeoutId);
+            }
+        };
+
+        const getBackendErrorMessage = (payload) => {
+            if (!payload || typeof payload !== "object") {
+                return "";
+            }
+
+            if (typeof payload.error === "string" && payload.error.trim().length > 0) {
+                return payload.error.trim();
+            }
+
+            return "";
+        };
+
+        const getWishListFromPayload = (payload) => {
+            if (!payload || typeof payload !== "object") {
+                return null;
+            }
+
+            if (payload.wish_list && typeof payload.wish_list === "object") {
+                return payload.wish_list;
+            }
+
+            if (Array.isArray(payload.wishes) || typeof payload.id === "string") {
+                return payload;
+            }
+
+            return null;
+        };
+
+        const getImageSrc = (imageField) => {
+            if (!imageField) {
+                return "";
+            }
+
+            if (typeof imageField === "string") {
+                return `data:image/jpeg;base64,${imageField}`;
+            }
+
+            if (Array.isArray(imageField)) {
+                const binary = imageField.map(charCode => String.fromCharCode(charCode)).join("");
+                return `data:image/jpeg;base64,${btoa(binary)}`;
+            }
+
+            return "";
+        };
+
+        const renderWishlist = (wishList) => {
+            title.textContent = `Вишлист от ${wishList.creator || "неизвестного автора"}`;
+
+            if (!Array.isArray(wishList.wishes) || wishList.wishes.length === 0) {
+                imageGrid.innerHTML = `
+                    <div class="col-span-2 rounded-3xl border border-dashed border-pink-300 dark:border-pink-800 p-6 text-center">
+                        <p class="text-sm text-charcoal dark:text-pink-100/80">В этом вишлисте пока нет желаний.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            imageGrid.innerHTML = "";
+            wishList.wishes.forEach((wish) => {
+                const card = document.createElement("div");
+                card.classList.add("group", "flex", "flex-col", "gap-3", "card-animate");
+
+                const imageSrc = getImageSrc(wish.image);
+                const fallbackGradient = "linear-gradient(135deg, #f9a8d4 0%, #f472b6 100%)";
+                const imageStyle = imageSrc
+                    ? `background-image: url('${imageSrc}');`
+                    : `background-image: ${fallbackGradient};`;
+
+                card.innerHTML = `
+                    <div class="relative aspect-[4/5] w-full rounded-3xl border-4 border-white bg-cover bg-center bg-no-repeat shadow-lg dark:border-gray-800"
+                         style="${imageStyle}">
+                    </div>
+                    <div class="flex flex-col items-center justify-center px-1 text-center sm:px-2">
+                        <p class="text-sm font-bold leading-tight text-charcoal dark:text-pink-50 sm:text-base"></p>
+                        <p class="mt-1 text-[11px] font-medium uppercase tracking-wider text-pink-400 dark:text-pink-300/60 sm:text-xs"></p>
+                    </div>
+                `;
+
+                const wishName = card.querySelector("p:first-child");
+                const wishDescription = card.querySelector("p:last-child");
+                wishName.textContent = wish.name || "Без названия";
+                wishDescription.textContent = wish.description || "Описание отсутствует";
+                imageGrid.appendChild(card);
+            });
+        };
+
+        const hideLoaderWithAnimation = () => {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.pointerEvents = 'none';
+            setTimeout(() => loadingScreen.remove(), 300);
+
+            document.querySelectorAll(".card-animate").forEach((card, i) => {
+                setTimeout(() => {
+                    card.classList.add("show");
+                }, i * 120);
+            });
+        };
+
+        const init = async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const wishlistId = urlParams.get('id');
+
+            if (!wishlistId) {
+                showError("В URL отсутствует параметр id. Откройте ссылку заново.");
+                return;
+            }
+
+            try {
+                const response = await fetchWithTimeout(`${api}/${encodeURIComponent(wishlistId)}`);
+                let data = null;
+
+                try {
+                    data = await response.json();
+                } catch (parseError) {
+                    data = null;
+                }
+
+                if (!response.ok) {
+                    const backendError = getBackendErrorMessage(data);
+                    throw new Error(backendError || `Сервер вернул ошибку ${response.status}`);
+                }
+
+                const backendError = getBackendErrorMessage(data);
+                if (backendError) {
+                    throw new Error(backendError);
+                }
+
+                const wishList = getWishListFromPayload(data);
+                if (!wishList) {
+                    throw new Error("Некорректный формат ответа сервера");
+                }
+
+                renderWishlist(wishList);
+                hideLoaderWithAnimation();
+            } catch (error) {
+                if (error.name === "AbortError") {
+                    showError("Сервер отвечает слишком долго. Проверьте соединение и попробуйте снова.");
+                    return;
+                }
+
+                console.error("Ошибка при загрузке данных:", error);
+                showError(error.message || "Произошла непредвиденная ошибка. Попробуйте позже.");
+            }
+        };
+
+        init();
+    });
 </script>
 </body>
 </html>
