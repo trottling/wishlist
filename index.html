@@ -273,7 +273,7 @@
             const wishlistId = urlParams.get('id');
 
             if (!wishlistId) {
-                showError("В URL отсутствует параметр id. Откройте ссылку заново.");
+                showError("В URL отсутствует параметр id. Он необходим что бы найти вишлист.");
                 return;
             }
 
@@ -289,7 +289,7 @@
 
                 if (!response.ok) {
                     const backendError = getBackendErrorMessage(data);
-                    throw new Error(backendError || `Сервер вернул ошибку ${response.status}`);
+                    throw new Error(backendError || `Сервер вернул ошибку: ${response.status}`);
                 }
 
                 const backendError = getBackendErrorMessage(data);
